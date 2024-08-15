@@ -1,6 +1,4 @@
-// Write your helper functions here!
-
-require("cross-fetch/polyfill");
+// require("cross-fetch/polyfill");
 
 function addDestinationInfo(
   document,
@@ -26,31 +24,51 @@ function addDestinationInfo(
 }
 
 function validateInput(testInput) {
-  if (testInput === "") {
+  if (testInput == "" || testInput == null || testInput == undefined) {
     return "Empty";
-  }
-  if (NaN(testInput)) {
+  } else if (isNaN(Number(testInput))) {
     return "Not a Number";
-  }
-  if (!NaN(testInput)) {
+  } else if (!isNaN(Number(testInput))) {
     return "Is a Number";
   }
 }
 
-function formSubmission(
-  document,
-  list,
-  pilot,
-  copilot,
-  fuelLevel,
-  cargoLevel
-) {
-    let pilot = validateInput(pilot);
-    let copilot = validateinput(copilot);
-    let fuelLevel = validateInput(fuelLevel);
-    let cargoLevel = validateInput(cargoLevel);
-    
+// document is "testForm"
+// list is "faultyItems"
+let documentVariable = document.getElementById("launchForm");
+let listVaraible = document.getElementById("faultyItems");
+let pilot = document.getElementsByName("pilotName"); //remove after testiing.
+let copilot = document.getElementsByName("copilotName");
+let fuelLevel = document.getElementsByName("fuelLevel");
+let cargoMass = document.getElementsByName("cargoMass");
+
+function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
+  let pilotValue = validateInput(pilot);
+  let copilotValue = validateInput(copilot);
+  let fuelLevelValue = validateInput(fuelLevel);
+  let cargoMassValue = validateInput(cargoLevel);
+
+  let valueArray = [pilotValue, copilotValue, fuelLevelValue, cargoMassValue];
+
+  
+
+  window.addEventListener("load", function () {
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      if (valueArray.includes("Empty")) {
+        alert("All fields are required");
+      }
+      if (
+        fuelLevelValue == "Not a Number" ||
+        cargoLevelValue == "Not a Number"
+      ) {
+        alert("Fuel Level and Cargo Mass Only Accept Numbers");
+      }
+    });
+  });
 }
+
+let formSubmissionVariable = formSubmission(documentVariable, listVaraible, pilot, copilot, fuelLevel, cargoMass);
 
 async function myFetch() {
   let planetsReturned;
@@ -62,8 +80,8 @@ async function myFetch() {
 
 function pickPlanet(planets) {}
 
-module.exports.addDestinationInfo = addDestinationInfo;
-module.exports.validateInput = validateInput;
-module.exports.formSubmission = formSubmission;
-module.exports.pickPlanet = pickPlanet;
-module.exports.myFetch = myFetch;
+// module.exports.addDestinationInfo = addDestinationInfo;
+// module.exports.validateInput = validateInput;
+// module.exports.formSubmission = formSubmission;
+// module.exports.pickPlanet = pickPlanet;
+// module.exports.myFetch = myFetch;
