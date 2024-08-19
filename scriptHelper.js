@@ -2,7 +2,6 @@
 
 require("cross-fetch/polyfill");
 
-
 function addDestinationInfo(
   document,
   name,
@@ -20,7 +19,7 @@ function addDestinationInfo(
                    <li>Distance from Earth: ${distance}</li>
                    <li>Number of Moons: ${moons}</li>
                </ol>
-               <img src="${imageUrl}">`
+               <img src=${imageUrl}>`;
 }
 
 function validateInput(testInput) {
@@ -48,21 +47,21 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
   ];
   //validates whether or not any of the inputs are empty, or if th ecargolevel and fuellevel are numbers.
   if (valueArray.includes("Empty")) {
-    alert("All fields are required");
-     noEmptyFields = false;
+    // alert("All fields are required");
+    noEmptyFields = false;
   }
   if (
     fuelLevelValidate == "Not a Number" ||
     cargoMassValidate == "Not a Number"
   ) {
-       areNumbers = false;
-    alert("Fuel Level and Cargo Mass Only Accept Numbers");
+    areNumbers = false;
+    // alert("Fuel Level and Cargo Mass Only Accept Numbers");
   }
   // sets the list to visible.
   if (noEmptyFields == true && areNumbers == true) {
-      list.style.visibility = "visible";
+    list.style.visibility = "visible";
   }
-  
+
   //sets the names of the pilot and copilit within the list
   if (pilotValueValidate != "Empty") {
     pilotStatus.innerHTML = `${pilot.value} is ready for launch`;
@@ -75,7 +74,7 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
   if (fuelLevel.value < 10000) {
     document.innerHTML = "Shuttle Not Ready for Launch";
     document.style.color = "red";
-    fuelStatus.innerHTML = "Fuel Level is too low for launch";
+    fuelStatus.innerHTML = "Fuel level too low for launch";
   } else {
     fuelStatus.innerHTML = "Fuel level high enough for launch";
   }
@@ -101,17 +100,18 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 async function myFetch() {
   let planetsReturned;
 
-  planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then(function (response) {
-    return  response.json();
+  planetsReturned = await fetch(
+    "https://handlers.education.launchcode.org/static/planets.json"
+  ).then(function (response) {
+    return response.json();
   });
 
   return planetsReturned;
 }
 
 function pickPlanet(planets) {
-  return planets[Math.floor(Math.random()*planets.length)];
+  return planets[Math.floor(Math.random() * planets.length)];
 }
-
 
 module.exports.addDestinationInfo = addDestinationInfo;
 module.exports.validateInput = validateInput;
