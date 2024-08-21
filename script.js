@@ -4,14 +4,14 @@ window.addEventListener("load", function () {
   let fuelLevel = this.document.getElementsByName("fuelLevel")[0];
   let cargoMass = this.document.getElementsByName("cargoMass")[0];
   let form = this.document.getElementById("launchForm");
-  let h2 = document.getElementById("launchStatus");
-  let list = document.getElementById("faultyItems");
+  let list = this.document.getElementById("faultyItems");
+  
   let missionTarget = this.document.getElementById("missionTarget");
   let input = this.document.getElementById("formSubmit");
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    formSubmission(h2, list, pilot, copilot, fuelLevel, cargoMass);
+    formSubmission(document, list, pilot.value, copilot.value, fuelLevel.value, cargoMass.value);
   });
 
   let listedPlanets;
